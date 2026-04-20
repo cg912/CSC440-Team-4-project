@@ -1,0 +1,61 @@
+Splint 3.1.2 --- 21 Feb 2021
+
+auth_test.c: (in function check_authentication)
+auth_test.c:9:5: Use of gets leads to a buffer overflow vulnerability.  Use
+                    fgets instead: gets
+  Use of function that may lead to buffer overflow. (Use -bufferoverflowhigh to
+  inhibit warning)
+auth_test.c:9:5: Return value (type char *) ignored: gets(password)
+  Result returned by function call is not used. If this is intended, can cast
+  result to (void) to eliminate message. (Use -retvalother to inhibit warning)
+echo_input.c: (in function log_user_input)
+echo_input.c:7:5: Format string parameter to printf is not a compile-time
+                     constant: user_input
+  Format parameter is not known at compile-time.  This can lead to security
+  vulnerabilities because the arguments cannot be type checked. (Use
+  -formatconst to inhibit warning)
+echo_input.c:11:5: Function main defined more than once
+  A function or variable is redefined. One of the declarations should use
+  extern. (Use -redef to inhibit warning)
+   auth_test.c:25:1: Previous definition of main
+memory_leak.c: (in function process_data)
+memory_leak.c:7:12: Possibly null storage data_buffer passed as non-null param:
+                       strcpy (data_buffer, ...)
+  A possibly null pointer is passed as a parameter corresponding to a formal
+  parameter with no /*@null@*/ annotation.  If NULL may be used for this
+  parameter, add a /*@null@*/ annotation to the function parameter declaration.
+  (Use -nullpass to inhibit warning)
+   memory_leak.c:6:25: Storage data_buffer may become null
+memory_leak.c:13:32: Variable data_buffer used after being released
+  Memory is used after it has been released (either by passing as an only param
+  or assigning to an only global). (Use -usereleased to inhibit warning)
+   memory_leak.c:10:10: Storage data_buffer released
+memory_leak.c:17:12: Possibly null storage forgotten_buffer passed as non-null
+                        param: strcpy (forgotten_buffer, ...)
+   memory_leak.c:16:30: Storage forgotten_buffer may become null
+memory_leak.c:20:2: Fresh storage forgotten_buffer not released before return
+  A memory leak has been detected. Storage allocated locally is not released
+  before the last reference to it is lost. (Use -mustfreefresh to inhibit
+  warning)
+   memory_leak.c:16:65: Fresh storage forgotten_buffer created
+memory_leak.c:22:5: Function main defined more than once
+   auth_test.c:25:1: Previous definition of main
+memory_leak.c: (in function main)
+echo_input.c:11:14: Parameter argc not used
+  A function parameter is not used in the body of the function. If the argument
+  is needed for type compatibility or future plans, use /*@unused@*/ in the
+  argument declaration. (Use -paramuse to inhibit warning)
+echo_input.c:11:26: Parameter argv not used
+auth_test.c:4:6: Function exported but not used outside auth_test:
+                    check_authentication
+  A declaration is exported, but not used outside this module. Declaration can
+  use static qualifier. (Use -exportlocal to inhibit warning)
+   auth_test.c:20:1: Definition of check_authentication
+echo_input.c:3:6: Function exported but not used outside echo_input:
+                     log_user_input
+   echo_input.c:9:1: Definition of log_user_input
+memory_leak.c:5:6: Function exported but not used outside memory_leak:
+                      process_data
+   memory_leak.c:20:1: Definition of process_data
+
+Finished checking --- 14 code warnings

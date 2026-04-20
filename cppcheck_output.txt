@@ -1,0 +1,9 @@
+Checking auth_test.c ...
+1/3 files checked 35% done
+Checking echo_input.c ...
+2/3 files checked 61% done
+Checking memory_leak.c ...
+memory_leak.c:20:1: error: Memory leak: forgotten_buffer [memleak]
+}
+^
+3/3 files checked 100% done
