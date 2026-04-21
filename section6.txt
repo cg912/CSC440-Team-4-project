@@ -6,3 +6,5 @@ Cppcheck    1   0   4   20%
 Flawfinder  3   4   2   33%
 
 Each static analysis tool was evaluated based on both detection performance and usability. Splint identified most of the known vulnerabilities, but its output included additional warnings that made it harder to interpret. Cppcheck produced simple and easy-to-read output, but it detected only one vulnerability, limiting its effectiveness. Flawfinder identified several key vulnerabilities and provided useful CWE references, but it also generated extra warnings, increasing false positives. Overall, tools that balance detection accuracy and clear output are more useful for developers.
+
+The results show that Splint had the highest detection rate, identifying most of the known vulnerabilities, while Cppcheck had the lowest detection coverage. Flawfinder performed moderately well but produced more false positives compared to the other tools. This highlights the trade-off between detection accuracy and the number of false warnings, which can impact how useful a tool is in real-world development.
